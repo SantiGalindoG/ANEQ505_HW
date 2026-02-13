@@ -28,25 +28,11 @@ We will first begin by copying raw sequencing data from a public folder on Alpin
 **Steps:**
 
 1. Log into Alpine using OnDemand and create a new directory for this new analysis in your _scratch_ directory. Hint: it should look something like: /scratch/alpine/$USER/cow/
-```
 
-ainteractive --time=01:00:00 --partition=amilan --nodes=1 --ntasks=2 --qos=normal
-
-```
-
-```
-
-mkdir cow
-
-```
 
 1. Move into your new directory using OnDemand
-```
 
-cd cow
-
-```
-1. Create the following sub-directories using OnDemand: 
+2. Create the following sub-directories using OnDemand: 
 	1. slurm
 	2. taxonomy
 	3. tree
@@ -55,17 +41,12 @@ cd cow
 	6. demux
 	7. metadata
 	8. core_metrics
-```
 
-mkdir slurm taxonomy tree taxaplots dada2 demux metadata core_metrics
+3. Download the cow_barcodes.txt and cow_metadata.txt files from Canvas and upload them both to your metadata folder within your new cow directory. So, your filepath should look something like this: /scratch/alpine/$USER/cow/metadata
 
-```
+4. On OnDemand, go to your cow directory and open a new terminal
 
-2. Download the cow_barcodes.txt and cow_metadata.txt files from Canvas and upload them both to your metadata folder within your new cow directory. So, your filepath should look something like this: /scratch/alpine/$USER/cow/metadata
-
-3. On OnDemand, go to your cow directory and open a new terminal
-
-4. Copy the raw sequencing files from this public folder to **your new folder** using the terminal. Do **not** change the names of these files and folders. Hint: make sure you are in your new cow folder before you run this code (this will copy over the whole folder):  
+5. Copy the raw sequencing files from this public folder to **your new folder** using the terminal. Do **not** change the names of these files and folders. Hint: make sure you are in your new cow folder before you run this code (this will copy over the whole folder):  
 
 ```
 cp -r /pl/active/courses/2024_summer/maw_2024/raw_reads .
@@ -75,12 +56,14 @@ cp -r /pl/active/courses/2024_summer/maw_2024/raw_reads .
 5.    Launch an interactive session and load qiime2 within your cow directory. 
 
 ```
+
 #launch an interactive session: 
 ainteractive --ntasks=6 --time=02:00:00
 
 
-#insert your code here to activate qiime. Hint: there should be 2 things you add here
+module purge
 
+module load qiime2/2024.10_amplicon
 
 ```
 
@@ -107,16 +90,19 @@ a.    Go into your slurm directory using OnDemand. Create a new file named **
 #SBATCH --mail-type=ALL
 #SBATCH --output=slurm-%j.out
 #SBATCH --qos=normal
-#SBATCH --mail-user=ADD_YOUR_EMAIL@colostate.edu
+#SBATCH --mail-user=santiago.galindogonzalez@colostate.edu
 
-#What needs to go here in order to “turn on” qiime2? Hint: we do these 2 commands every time we activate qiime2!
+module purge
+
+module load qiime2/2024.10_amplicon
+
 
 #change the following line if your file path looks different
 cd /scratch/alpine/$USER/cow/demux
 
 #Below is the command you will run to demultiplex the samples.
 
-qiime demux emp-paired \--m-barcodes-file ../metadata/ADD BARCODE FILE NAME HERE \--m-barcodes-column barcode \--p-rev-comp-mapping-barcodes \--p-rev-comp-barcodes \--i-seqs ../cow_reads.qza \--o-per-sample-sequences demux_cow.qza \--o-error-correction-details cow_demux_error.qza
+qiime demux emp-paired \--m-barcodes-file ../metadata/cow_barcodes.txt \--m-barcodes-column barcode \--p-rev-comp-mapping-barcodes \--p-rev-comp-barcodes \--i-seqs ../cow_reads.qza \--o-per-sample-sequences demux_cow.qza \--o-error-correction-details cow_demux_error.qza
 
 #visualize the read quality
 qiime demux summarize \--i-data demux_cow.qza \--o-visualization demux_cow.qzv
@@ -125,8 +111,8 @@ qiime demux summarize \--i-data demux_cow.qza \--o-visualization demux_cow.qzv
 
  Run the script in your slurm directory as a job using: 
  ```
- dos2unix name of your script.sh
- sbatch name of your script.sh
+dos2unix demux_job.sh
+sbatch name of your script.sh
  ```
 
 8.    Denoise
