@@ -2,9 +2,10 @@
 
 **Due Feb 12th at midnight**
 
-**Name:**
+**Name: Santiago Galindo González**
 
 **For complete credit for this assignment, you must answer all questions and include all commands in your obsidian upload.**
+
 
 ------------------------------------------------------------------------
 **Learning Objectives**
@@ -27,8 +28,25 @@ We will first begin by copying raw sequencing data from a public folder on Alpin
 **Steps:**
 
 1. Log into Alpine using OnDemand and create a new directory for this new analysis in your _scratch_ directory. Hint: it should look something like: /scratch/alpine/$USER/cow/
-2. Move into your new directory using OnDemand
-3. Create the following sub-directories using OnDemand: 
+```
+
+ainteractive --time=01:00:00 --partition=amilan --nodes=1 --ntasks=2 --qos=normal
+
+```
+
+```
+
+mkdir cow
+
+```
+
+1. Move into your new directory using OnDemand
+```
+
+cd cow
+
+```
+1. Create the following sub-directories using OnDemand: 
 	1. slurm
 	2. taxonomy
 	3. tree
@@ -37,12 +55,17 @@ We will first begin by copying raw sequencing data from a public folder on Alpin
 	6. demux
 	7. metadata
 	8. core_metrics
+```
 
-4. Download the cow_barcodes.txt and cow_metadata.txt files from Canvas and upload them both to your metadata folder within your new cow directory. So, your filepath should look something like this: /scratch/alpine/$USER/cow/metadata
+mkdir slurm taxonomy tree taxaplots dada2 demux metadata core_metrics
 
-5. On OnDemand, go to your cow directory and open a new terminal
+```
 
-6. Copy the raw sequencing files from this public folder to **your new folder** using the terminal. Do **not** change the names of these files and folders. Hint: make sure you are in your new cow folder before you run this code (this will copy over the whole folder):  
+2. Download the cow_barcodes.txt and cow_metadata.txt files from Canvas and upload them both to your metadata folder within your new cow directory. So, your filepath should look something like this: /scratch/alpine/$USER/cow/metadata
+
+3. On OnDemand, go to your cow directory and open a new terminal
+
+4. Copy the raw sequencing files from this public folder to **your new folder** using the terminal. Do **not** change the names of these files and folders. Hint: make sure you are in your new cow folder before you run this code (this will copy over the whole folder):  
 
 ```
 cp -r /pl/active/courses/2024_summer/maw_2024/raw_reads .
