@@ -120,7 +120,7 @@ sbatch demux_job.sh
 Fill in the blank to denoise your samples based on what you think should be trimmed (from the front of the reads) or truncated (from the ends of the reads) based on the demux_cow.qzv file. You can run this in the terminal or as a job.
 
 ```
-cd ../dada2
+cd ../slurm
 
 qiime dada2 denoise-paired \--i-demultiplexed-seqs ../demux/demux_cow.qza \--p-trim-left-f 0 \--p-trim-left-r 0 \--p-trunc-len-f 250 \--p-trunc-len-r 250 \--o-representative-sequences cow_seqs_dada2.qza \--o-denoising-stats cow_dada2_stats.qza \--o-table cow_table_dada2.qza
 
