@@ -142,7 +142,7 @@ Briefly **describe** the key information from each denoising output file:
 1. Where does the median Q-score begin to dip below Q30 for the forward reads and the reverse reads?
 	1. In the forward reads it never fall below Q30 and in the reverse just until position 251 it is below Q30.
 2. What is the mean reads per sample?
-	1. The mean read per sample is 15163.4.
+	1. The mean read per sample is 15163.4 (prior denoising).
 3. How long are the reads?
 	1. The reads are 251nts long (prior denoising).
 4. What is the maximum length of all your sequences?
