@@ -120,7 +120,7 @@ sbatch demux_job.sh
 Fill in the blank to denoise your samples based on what you think should be trimmed (from the front of the reads) or truncated (from the ends of the reads) based on the demux_cow.qzv file. You can run this in the terminal or as a job.
 
 ```
-cd ../slurm
+cd ../dada2
 
 qiime dada2 denoise-paired \--i-demultiplexed-seqs ../demux/demux_cow.qza \--p-trim-left-f 0 \--p-trim-left-r 0 \--p-trunc-len-f 250 \--p-trunc-len-r 250 \--o-representative-sequences cow_seqs_dada2.qza \--o-denoising-stats cow_dada2_stats.qza \--o-table cow_table_dada2.qza
 
@@ -140,11 +140,16 @@ Briefly **describe** the key information from each denoising output file:
 
 **Answer the following questions:**  
 1. Where does the median Q-score begin to dip below Q30 for the forward reads and the reverse reads?
+	1. In the forward reads it never fall below Q30 and in the reverse just until position 251 it is below Q30.
 2. What is the mean reads per sample?
+	1. The mean read per sample is 15163.4.
 3. How long are the reads?
+	1. The reads are 251nts long (prior denoising).
 4. What is the maximum length of all your sequences?
+	1. The maximum length is of 251nts (prior denoising).
 5. Which sample (not including extraction controls starting with EC) lost the highest % of reads?
 6. Why did you chose to trim or truncate where you did?
+	1. I chose not to trim since there was no low quality at the begining of the reads and I truncate at 250 because in the reverse the Q score fall below 30 at 251.
 
 **To submit your homework from this document:**
 write all of your commands here, then use command+P (for mac) or control+P (for windows) and search Git: commit. click it. then search for Git: Push and click it. go to your github online to check that it pushed correctly. we will check your github for homework credit. 
