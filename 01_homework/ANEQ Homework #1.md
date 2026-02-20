@@ -142,14 +142,15 @@ Briefly **describe** the key information from each denoising output file:
 1. Where does the median Q-score begin to dip below Q30 for the forward reads and the reverse reads?
 	1. In the forward reads it never fall below Q30 and in the reverse just until position 251 it is below Q30.
 2. What is the mean reads per sample?
-	1. The mean read per sample is 15163.4 (prior denoising).
+	1. The mean read per sample is 15163.4.
 3. How long are the reads?
-	1. The reads are 251nts long (prior denoising).
+	1. The reads are 251nts long.
 4. What is the maximum length of all your sequences?
-	1. The maximum length is of 251nts (prior denoising).
+	1. The maximum length is of 427nts.
 5. Which sample (not including extraction controls starting with EC) lost the highest % of reads?
+	1. 2019.3.14.cow.oral.20 loosing more than 90% of the reads.
 6. Why did you chose to trim or truncate where you did?
-	1. I chose not to trim since there was no low quality at the begining of the reads and I truncate at 250 because in the reverse the Q score fall below 30 at 251.
+	1. I chose not to trim since there was no low quality at the beginning of the reads and I truncate at 250 because in the reverse the Q score fall below 30 at 251.
 
 **To submit your homework from this document:**
 write all of your commands here, then use command+P (for mac) or control+P (for windows) and search Git: commit. click it. then search for Git: Push and click it. go to your github online to check that it pushed correctly. we will check your github for homework credit. 
