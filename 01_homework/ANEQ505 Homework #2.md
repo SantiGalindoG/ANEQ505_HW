@@ -51,17 +51,17 @@ wget --no-check-certificate https://ftp.microbio.me/greengenes_release/2024.09/2
 
 Classify taxonomy using GreenGenes2 classify the ASVs (takes about 5 mins). ~={red}(1point)=~
 ```
-qiime feature-classifier classify-sklearn \--i-reads ../dada2/cow_seqs_dada2_filtered300.qza \--i-classifier 2024.09.backbone.v4.nb HERE.qza \--o-classification taxonomy_gg2_filtered.qza
+qiime feature-classifier classify-sklearn \--i-reads ../dada2/cow_seqs_dada2_filtered300.qza \--i-classifier 2024.09.backbone.v4.nb.qza \--o-classification taxonomy_gg2_filtered.qza
 ```
 
 Visualize the taxonomy of your ASVs: (~={red}1point)=~
 ```
-qiime metadata tabulate \--m-input-file NAME OF TAXONOMY FILE.qza \--o-visualization taxonomy_gg2_filtered.qzv
+qiime metadata tabulate \--m-input-file taxonomy_gg2_filtered.qza \--o-visualization taxonomy_gg2_filtered.qzv
 ```
 
 - Filter mitochondria and chloroplast out to generate a filtered feature table, keep only ASVs with a class or lower taxonomy. fill in the blank (--p-exclude) to exclude these DNA. Fill in the blank to include only class level or below classifications. ~={red}(1point)=~
 ```
-qiime taxa filter-table \--i-table ../dada2/<YourDenoisedTable.qza> \--i-taxonomy taxonomy_gg2.qza \--p-exclude WHAT TO EXCLUDE HERE \--p-include WHAT TO INCLUDE HERE \--o-filtered-table ../dada2/table_nomitochloro_gg2_filtered300.qza
+qiime taxa filter-table \--i-table ../dada2/cow_table_dada2_filtered300.qza \--i-taxonomy taxonomy_gg2_filtered.qza \--p-exclude mitochondria,chloroplast,sp004296775 \--p-include c__ \--o-filtered-table ../dada2/table_nomitochloro_gg2_filtered300.qza
 ```
 
 - Visualize the taxa bar plot
@@ -73,32 +73,56 @@ qiime taxa barplot \--i-table ../dada2/table_nomitochloro_gg2_filtered300.qza \-
 
 **Question 1**: Attach a picture of your taxa bar plot, organized by cow sampling location (body_site) at the level 7 taxonomic level. What general trends do you notice? 
 
+![[Screenshot 2026-03-03 112526 1.png]]
+
 **_Question 2**: What are the top 2 most abundant bacterial **classes** in the fecal samples? 
+
+c__Clostridia_258483
+c__Bacteroidia
+c__Spirochaetia
 
 **_Question 3**: What highly abundant ASV is shared between both the udder and skin samples?
 
+These samples share an ASV from the specie s__Faecousia sp000434635
+
 **_Question 4**: Which samples (still sorted by body_site) have higher alpha diversity in terms of observed features?
+
+It is hard to distinguish just by looking at the taxa bar plot at species level because of the high diversity of the low abundant species in some samples. But it seems that faecal, skin and udder are the most diverse.
+
+Taking into account what we have seen in class I would say that faecal is more diverse regardless it is clearly that these samples have some species with a higher relative abundance while skin and udder are somehow more even.
 
 **Question 5**: do all samples contain archaea as well?
 
+Some oral and nassal and just one udder sample does not contain archeae
+
 **Question 6**: why do we filter out sp004296775?
+
+Is another chloroplast feature
 
 **Question 7**: what is the difference between these two flags? 
 --p-exclude mitochondria,chloroplast,sp004296775 \
 --p-include c__ \
 
+--p-exclude is going to remove every feature that is identified as these taxa while --p-include is going to maintain only the features that are identifyed at least at class level.
+
 **Question 8**: do the positive controls look the same as each other? Yes or No?
+
+Yes
 
 **Question 9**: Do the negative/extraction controls (Samples labeled as EC), look like the positive controls? Yes or no? 
 
+No
+
 **Question 10**: do the negative/extraction controls (Samples labeled as EC), look like the real samples? Yes or no?
+
+No
 
 ## Phylogenetic tree ~={red}(1 point)=~
 Create a job script to run the phylogenetic tree building. Remember you must start a new terminal session, navigate to your slurm directory, and then submit the job. You do NOT need to start any other interactive sessions.This job will take about an hour. 
 
 Go to OnDemand and create a new text file for your job script
 ```
-nano <YourJobName.sh>
+nano tree.sh
 ```
 
 ```
@@ -109,27 +133,28 @@ nano <YourJobName.sh>
 #SBATCH --partition=amilan
 #SBATCH --time=04:00:00
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=YOUR_EMAIL_HERE@colostate.edu
+#SBATCH --mail-user=santiago.galindogonzalez@colostate.edu
 #SBATCH --output=slurm-%j.out
 #SBATCH --qos=normal
 
 #Activate qiime
-#Insert the two commands you need to load qiime2
+module purge
 
+module load qiime2/2024.10_amplicon
 
 #Get reference
 wget --no-check-certificate -P ../tree https://ftp.microbio.me/greengenes_release/2022.10/2022.10.backbone.sepp-reference.qza
 
 
 #Command
-qiime fragment-insertion sepp \--i-representative-sequences ../dada2/Your_FILTERED_RepresentativeSequencesFile.qza \--i-reference-database ../tree/2022.10.backbone.sepp-reference.qza \--o-tree ../tree/tree_gg2.qza \--o-placements ../tree/tree_placements_gg2.qza
+qiime fragment-insertion sepp \--i-representative-sequences ../dada2/cow_seqs_dada2_filtered300.qza \--i-reference-database ../tree/2022.10.backbone.sepp-reference.qza \--o-tree ../tree/tree_gg2.qza \--o-placements ../tree/tree_placements_gg2.qza
 ```
 
 - submit the job from the terminal
 ```
 #submit the job
-dos2unix YourJobName.sh
-sbatch YourJobName.sh
+dos2unix tree.sh
+sbatch tree.sh
 ```
 We will use this file in the next homework!
 
