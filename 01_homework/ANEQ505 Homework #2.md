@@ -78,48 +78,49 @@ qiime taxa barplot \--i-table ../dada2/table_nomitochloro_gg2_filtered300.qza \-
 Some interesting trends that I can notice are:
 - Oral and nasal seem to be somehow similar meanwhile skin and udder are also similar and are more similar to fecal than oral and nasal.
 - Samples from fecal, skin and udder are more similar to samples from the same origin while oral and nasal seems to be more distant to samples from the same origin.
-- 
+- About a 30% average in the fecal samples seems to be dominated by three species. Oral and nasal samples does not show this big dominance from some species while skin and udder are very dominated by a few features but these are not consistent between samples.
+
 **_Question 2**: What are the top 2 most abundant bacterial **classes** in the fecal samples? 
 
-c__Clostridia_258483
-c__Bacteroidia
-c__Spirochaetia
+	c__Clostridia_258483
+	c__Bacteroidia
+	c__Spirochaetia
 
 **_Question 3**: What highly abundant ASV is shared between both the udder and skin samples?
 
-These samples share an ASV from the specie s__Faecousia sp000434635
+	These samples share an ASV from the specie s__Faecousia sp000434635
 
 **_Question 4**: Which samples (still sorted by body_site) have higher alpha diversity in terms of observed features?
 
-It is hard to distinguish just by looking at the taxa bar plot at species level because of the high diversity of the low abundant species in some samples. But it seems that faecal, skin and udder are the most diverse.
+	It is hard to distinguish just by looking at the taxa bar plot at species level because of the high diversity of the low abundant species in some samples. But it seems that faecal, skin and udder are the most diverse.
 
-Taking into account what we have seen in class I would say that faecal is more diverse regardless it is clearly that these samples have some species with a higher relative abundance while skin and udder are somehow more even.
+	Taking into account what we have seen in class I would say that faecal is more diverse regardless it is clearly that these samples have some species with a higher relative abundance while skin and udder are somehow more even.
 
 **Question 5**: do all samples contain archaea as well?
 
-Some oral and nassal and just one udder sample does not contain archeae
+	Some oral and nassal and just one udder sample does not contain archeae
 
 **Question 6**: why do we filter out sp004296775?
 
-Is another chloroplast feature
+	Is another chloroplast feature
 
 **Question 7**: what is the difference between these two flags? 
 --p-exclude mitochondria,chloroplast,sp004296775 \
 --p-include c__ \
 
---p-exclude is going to remove every feature that is identified as these taxa while --p-include is going to maintain only the features that are identifyed at least at class level.
+	--p-exclude is going to remove every feature that is identified as these taxa while --p-include is going to maintain only the features that are identifyed at least at class level.
 
 **Question 8**: do the positive controls look the same as each other? Yes or No?
 
-Yes
+	Yes
 
 **Question 9**: Do the negative/extraction controls (Samples labeled as EC), look like the positive controls? Yes or no? 
 
-No
+	No
 
 **Question 10**: do the negative/extraction controls (Samples labeled as EC), look like the real samples? Yes or no?
 
-No
+	No
 
 ## Phylogenetic tree ~={red}(1 point)=~
 Create a job script to run the phylogenetic tree building. Remember you must start a new terminal session, navigate to your slurm directory, and then submit the job. You do NOT need to start any other interactive sessions.This job will take about an hour. 
