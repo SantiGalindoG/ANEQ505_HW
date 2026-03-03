@@ -75,6 +75,10 @@ qiime taxa barplot \--i-table ../dada2/table_nomitochloro_gg2_filtered300.qza \-
 
 ![[Screenshot 2026-03-03 112526 1.png]]
 
+Some interesting trends that I can notice are:
+- Oral and nasal seem to be somehow similar meanwhile skin and udder are also similar and are more similar to fecal than oral and nasal.
+- Samples from fecal, skin and udder are more similar to samples from the same origin while oral and nasal seems to be more distant to samples from the same origin.
+- 
 **_Question 2**: What are the top 2 most abundant bacterial **classes** in the fecal samples? 
 
 c__Clostridia_258483
