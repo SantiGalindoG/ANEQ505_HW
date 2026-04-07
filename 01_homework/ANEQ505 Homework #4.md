@@ -93,8 +93,8 @@ one of the qiime2 packages needs to be updated it won't affect the qiime2 output
 ```
 # Get matadata with no controls
 cp /pl/active/courses/2025_summer/CSU_2025/cow_hw/cow_metadata_nocontrols.txt .
-qiime feature-table filter-samples \--i-table
-../dada2/table_nomitochloro_gg2_filtered300.qza \--m-metadata-file
+
+qiime feature-table filter-samples \--i-table ../dada2/table_nomitochloro_gg2_filtered300.qza \--m-metadata-file
 cow_metadata_nocontrols.txt \--o-filtered-table
 table_nomitochlorocontrols_gg2_filtered300.qza
 ```
