@@ -105,7 +105,7 @@ BC2 analysis
 - Choose the min frequency for sample filtering:
 ```
 qiime feature-table filter-samples \--i-table
-table_nomitochlorocontrols_gg2_filtered300.qza \--p-min-frequency YOUR NUMBER HERE
+table_nomitochlorocontrols_gg2_filtered300.qza \--p-min-frequency 5000
 \--o-filtered-table table_5k.qza
 ```
 **Filter out low abundance and low prevalence ASVs ~={red}(1 point)=~**
@@ -118,21 +118,21 @@ qiime feature-table filter-features \--i-table INPUT TABLE \--p-min-frequency 50
 (Hint: We used 7 for species, so think about which number you would use for genus.)
 ```
 qiime taxa collapse \--i-table table_5k_abund.qza \--i-taxonomy
-../taxonomy/taxonomy_gg2.qza \--p-level GENUS NUMBER \--o-collapsed-table
-table_5k_abund_GENUS NUMBER.qza
+../taxonomy/taxonomy_gg2.qza \--p-level 6 \--o-collapsed-table
+table_5k_abund_6.qza
 ```
 **Run ANCOM-BC2 ~={red}(1 point)=~**
 ```
-qiime composition ancombc2 \--i-table table_5k_abund_GENUS NUMBER.qza \--m-
+qiime composition ancombc2 \--i-table table_5k_abund_6.qza \--m-
 metadata-file cow_metadata_nocontrols.txt \--p-fixed-effects-formula body_site \--
 o-ancombc2-output ancombc2_results_bodysite_genus.qza
 ```
 **Visualize the ANCOM-BC2 results ~={red}(1 point)=~**
 - Generate a barplot to visualize the differentially abundant features.
 ```
-qiime composition tabulate \--i-data INPUT FILE \--o-visualization
+qiime composition tabulate \--i-data ancombc2_results_bodysite_genus.qza \--o-visualization
 ancombc2_bodysite_genus.qzv
-qiime composition ancombc2-visualizer \--i-data INPUT FILE \--o-visualization
+qiime composition ancombc2-visualizer \--i-data ancombc2_barplot_bodysite_genus.qza \--o-visualization
 ancombc2_barplot_bodysite_genus.qzv
 ```
 ## Homework questions: (~={red}5 POINTS=~)
@@ -171,7 +171,11 @@ random-state 123 \--p-n-jobs 1 \--output-dir sample_classifier_results_bodysite
 ```
 ### **Questions:**
 1. Why might removing controls be important before downstream analysis?
+Controls have very different microbial composition (for example negative controls might have very low abundances of features due to cross contamination). Those control samples might alter the differential abundances analysis because they are very different.
+
 2. what 2 features that are high in fecal samples?
+
 3. what are 2 features that are low in nasal?
+
 4. what is the accuracy of your model, and if the accuracy of the classifier is
 high, what does that suggest about the microbial compositions of each site?
