@@ -138,12 +138,18 @@ ancombc2_barplot_bodysite_genus.qzv
 ## Homework questions: (~={red}5 POINTS=~)
 1. Describe one way to get data from your qiime2 outputs into a format that can be
 used for R.
+One way is to unzip the qza files. 
+
 2. Which body site appeared most distinct in the taxa bar plot, meaning it was not
 similar to at least one of the other body sites? Explain why that site looks
 different.
+The fecal samples are completely different to other samples. It might look different because oral and nasal (which are similar) are very close to each other and got many opportunities to share taxa. Similarly udder and skin are spatially continuous which gives them opportunities to share microbes.
+
 3. When generating the filtered table for ANCOM-BC2, what value did you choose for
 `--p-min-frequency`? Which core metrics parameter should this match, and why do
 these values need to be the same? (Report your core metrics value here: ___)
+
+
 4. Why do we filter out samples with low frequency and low abundance ASVs?
 5. What was the most enriched genus in skin compared to fecal, and what was the
 most depleted genus in skin compared to fecal (make sure adjusted p is set to less
