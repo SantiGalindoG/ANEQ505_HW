@@ -147,10 +147,12 @@ The fecal samples are completely different to other samples. It might look diffe
 
 3. When generating the filtered table for ANCOM-BC2, what value did you choose for
 `--p-min-frequency`? Which core metrics parameter should this match, and why do
-these values need to be the same? (Report your core metrics value here: ___)
+these values need to be the same? (Report your core metrics value here: 
 
 
 4. Why do we filter out samples with low frequency and low abundance ASVs?
+These low frequent and low abundance ASVs might introduce bias because they might appear in some samples and not appear in others increasing the chance of a false positive.
+
 5. What was the most enriched genus in skin compared to fecal, and what was the
 most depleted genus in skin compared to fecal (make sure adjusted p is set to less
 than 0.05)?
